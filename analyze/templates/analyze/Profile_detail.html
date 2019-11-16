@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>"{{ user.name }}" User Information</h2>
+<table>
+    <tr>
+        <td style="width:150px;">User Name</td><td style="width:300px;">{{ user.name }}</td>
+    </tr>
+    <tr>
+        <td style="width:150px;">Salutation</td><td style="width:300px;">{{ user.salutation }}</td>
+    </tr>
+    <tr>
+        <td style="width:150px;">Rival</td><td style="width:300px;"><a href="/analyze/user/{{ user.rival.id }}/" title="{{ user.rival.name}} 님의 프로필 정보">{{ user.rival.name }}</a></td>
+    </tr>
+    <tr>
+        <td colspan="2" style="width:150px;"><a href="/analyze/user/{{ user.id }}/playdata" title="{{ user.name }} 님의 플레이 스코어 데이터">Play Data</a></td>
+    </tr>
+    <tr>
+        <td colspan="2" style="width:150px;"><a href="/analyze/user/{{ user.id }}/skill" title="{{ user.name }} 님의 스킬 스코어 데이터">Skill</a></td>
+    </tr>
+    <tr>
+        <td colspan="2" style="width:150px;"><a href="/analyze/user/{{ user.id }}/vs" title="{{ user.name }} 님과 {{user.rival.name }} 님의 스코어 비교">Rival Versus</a></td>
+    </tr>
+</table>
+
+<br><br><a href="/analyze/user/"> << Back</a>
+{% endblock content %}

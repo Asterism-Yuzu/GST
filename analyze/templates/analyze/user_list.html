@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>User List</h2>
+{% if userlist %}
+    <table>
+        {% for user in userlist %}
+        <tr>
+            <td style="width:300px;"><a href="/analyze/user/{{ user.id }}/" title="{{ user.name }} 님의 프로필 정보">{{ user.name }}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br><br><a href="/analyze/"> << Back</a>
+{% else %}
+    <p>No User Data</p>
+
+    <br><br><a href="/analyze/"> << Back</a>
+{% endif %}
+
+{% endblock content %}

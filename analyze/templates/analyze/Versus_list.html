@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2><a href="/analyze/user/{{ User.id }}" title="{{ User.name}} 님의 프로필 정보">"{{ User.name }}"</a> vs <a href="/analyze/user/{{ User.rival.id }}" title="{{ User.rival.name}} 님의 프로필 정보">"{{ User.rival.name }}"</a> Score Compare</h2>
+{% if skilltable %}
+    <ul>
+    {% for skill in skilltable %}
+            {% if User.id == skill.user.get_id %}
+                {% for rskill in skilltables %}
+                    {% if User.rival.get_id == rskill.user.get_id %}
+                        {% if skill.song == rskill.song %}
+                            <p>Song name : <a href="/analyze/song/{{ skill.song.id}}" title="{{ skill.song.name }} 노래 정보">{{ skill.song.name }}</a></p>
+                            <ul><li>My acheive : {{ skill.acheive }}</li><li>Rival's acheive : {{ rskill.acheive }}</li></ul>
+                            {% if skill.acheive > rskill.acheive %}
+                                <p>{{ User.name }} Win!<br><br></p>
+                            {% else %}
+                                <p>You Lose...<br><br></p>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+        {% endif %}
+    {% endfor %}
+    </ul>
+    <a href="/analyze/user/{{ User.id }}"> << Back</a>
+{% endif %}
+
+{% endblock content %}

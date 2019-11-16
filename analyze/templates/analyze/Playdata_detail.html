@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>"{{ User.name }}" Play Data</h2>
+{% if skilltable %}
+    <table>
+        <thead>
+            <th>Song Name</th> <th>Acheive Rate</th>
+        </thead>
+    {% for score in skilltable %}
+            {% if User.id == score.user.get_id %}
+                <tr>
+                    <td><a href="/analyze/song/{{ score.song.id }}/" title="{{ score.song.name }} 노래 정보">{{ score.song.name }}</a></td> <td>{{ score.acheive }} %</td>
+                </tr>
+            {% endif %}
+    {% endfor %}
+    </table>
+{% endif %}
+
+<br><br><a href="/analyze/user/{{ User.id }}"> << Back</a>
+{% endblock content %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Song List</h2>
+{% if song %}
+    <table>
+        {% for songdata in song %}
+        <tr>
+            <td style="width:300px;"><a href="/analyze/song/{{ songdata.id }}/" title="{{ songdata.name }} 노래 정보">{{ songdata.name }}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br><br><a href="/analyze/"> << Back</a>
+{% else %}
+    <p>No Song Data</p>
+    <br><br><a href="/analyze/"> << Back</a>
+{% endif %}
+
+{% endblock content %}

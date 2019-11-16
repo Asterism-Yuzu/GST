@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>"{{ song.name }}" Song Information</h2>
+<table>
+    <tr>
+        <td style="width:150px;">Title</td><td style="width:300px;">{{ song.name }}</td>
+    </tr>
+    <tr>
+        <td style="width:150px;">Composer</td><td style="width:300px;">{{ song.composer }}</td>
+    </tr>
+    <tr>
+        <td style="width:150px;">Level</td><td style="width:300px;">{{ song.level }}</td>
+    </tr>
+</table>
+<br><br><a href="/analyze/song/"> << Back</a>
+{% endblock content %}
