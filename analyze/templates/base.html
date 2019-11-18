@@ -14,8 +14,9 @@
             text-indent: 10px;
         }
 
-        #content a {
+        #content a:link, a:visited {
             text-decoration: none;
+            color: blue;
         }
 
         #top a:link, a:visited {
@@ -23,7 +24,7 @@
             width: 100%;
             text-align: left;
             text-decoration: none;
-            
+
         }
 
         #topbar a:link, a:visited {
@@ -62,25 +63,29 @@
         #logo {
             color: white;
         }
+
+        a:visited {
+            color: blue;
+        }
     </style>
 </head>
 
 <body>
     <div id="top">
-        <h2 id="logo"><a href="/analyze/" title="GITADORA Score Tool"><img src=
+        <h2 id="logo"><a href="/analyze/" title="GITADORA Score Tool" style="color: white;"><img src=
             "https://p.eagate.573.jp/game/gfdm/gitadora_nextage/p/img/common/logo.png"
             style="width:25%; height:25%;">
         GITADORA Score Tool</a></h2>
 
 
         <p id="topbar">
-            
-            <a href="/analyze/user/" title="유저 리스트"><b>User List</b></a>
-            <a href="/analyze/user/register/" title="회원 등록"><b>User Register</b></a>
-            <a href="/analyze/song/" title="노래 리스트"><b>Song List</b></a>
-            <a href="/analyze/song/register/" title="노래 등록"><b>Song Register</b></a>
-            <a href="/analyze/score/register/" title="스코어 데이터 등록"><b>Score Data Register</b></a>
-            
+
+            <a href="/analyze/user/" title="유저 리스트" style="color: black"><b>User List</b></a>
+            <a href="/analyze/user/register/" title="회원 등록" style="color: black"><b>User Register</b></a>
+            <a href="/analyze/song/" title="노래 리스트" style="color: black"><b>Song List</b></a>
+            <a href="/analyze/song/register/" title="노래 등록" style="color: black"><b>Song Register</b></a>
+            <a href="/analyze/score/register/" title="스코어 데이터 등록" style="color: black"><b>Score Data Register</b></a>
+
         </p>
 
     <br>
