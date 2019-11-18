@@ -1,5 +1,6 @@
 from django.db import models
 from django.forms import ModelForm
+from django.utils import timezone
 # Create your models here.
 
 class User(models.Model):
@@ -35,6 +36,8 @@ class Score(models.Model):
     acheive = models.FloatField()
     song = models.ForeignKey(Song,on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+    pub_date = models.DateTimeField(default = timezone.now)
+    skill = models.FloatField(null = True, blank = True)
 
     def __float__(self):
         return self.acheive

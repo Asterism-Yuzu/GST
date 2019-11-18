@@ -16,6 +16,8 @@
     {% endfor %}
     </table>
     <br><br><a href="/analyze/user/{{ User.id }}"> << Back</a>
+{% else %}
+<p>No Play Data</p>
 {% endif %}
 
 {% endblock content %}

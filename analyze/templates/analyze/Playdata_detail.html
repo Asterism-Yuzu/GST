@@ -10,12 +10,13 @@
     {% for score in skilltable %}
             {% if User.id == score.user.get_id %}
                 <tr>
-                    <td><a href="/analyze/song/{{ score.song.id }}/" title="{{ score.song.name }} 노래 정보">{{ score.song.name }}</a></td> <td>{{ score.acheive }} %</td>
+                    <td><a href="/analyze/song/{{ score.song.id }}/" title="{{ score.song.name }} 노래 정보">{{ score.song.name }}</a></td> <td>{{ score.acheive }} %</td> <td style="width:200px;">{{ score.pub_date }}</td>
                 </tr>
             {% endif %}
     {% endfor %}
     </table>
+{% else %}
+<p>No Play Data</p>
 {% endif %}
-
 <br><br><a href="/analyze/user/{{ User.id }}"> << Back</a>
 {% endblock content %}

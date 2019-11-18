@@ -49,7 +49,7 @@ def SongRegister(request):
 
 def Playdata(request, user_id):
     user = get_object_or_404(User, pk = user_id)
-    skilltable = Score.objects.all()
+    skilltable = Score.objects.order_by('-pub_date').filter(user = user.get_id())
     context = {'User' : user, 'skilltable' : skilltable}
     return render(request, 'analyze/Playdata_detail.html', context)
 
@@ -58,6 +58,7 @@ def ScoreRegister(request):
         form = ScoreForm(request.POST)
         if form.is_valid():
             form.save()
+            checkOverlap()
         return redirect('/analyze')
     else:
         form = ScoreForm
@@ -65,9 +66,7 @@ def ScoreRegister(request):
 
 def Skill(request, user_id):
     user = get_object_or_404(User, pk = user_id)
-    skilltable = Score.objects.all()
-    for s in skilltable:
-        s.skill = round(s.acheive * s.song.level / 5,2)
+    skilltable = Score.objects.filter(user = user.get_id()).order_by('skill')[:50]
     context = {'User' : user, 'skilltable' : skilltable}
     return render(request, 'analyze/Skill.html', context)
 
@@ -75,7 +74,19 @@ def Skill(request, user_id):
 
 def Versus(request, user_id):
     user = get_object_or_404(User, pk = user_id)
-    skilltable = Score.objects.all()
-    skilltable = Score.objects.all()
-    context = {'User' : user, 'skilltable' : skilltable, 'skilltables' : skilltable}
+    skilltable = Score.objects.filter(user = user.get_id())
+    fskilltable = Score.objects.filter(user = user.rival.get_id())
+    context = {'User' : user, 'skilltable' : skilltable, 'skilltables' : fskilltable}
     return render(request, 'analyze/Versus_list.html', context)
+
+def checkOverlap():
+    S = Score.objects.order_by('-pub_date')[0]
+    s = Score.objects.filter(user = S.user, song = S.song).order_by('pub_date').first()
+    if (S.id == s.id):
+        return;
+    if S.acheive > s.acheive:
+        S.skill = round(s.acheive * s.song.level / 5,2)
+        S.save()
+        s.delete()
+    else:
+        S.delete()
