@@ -19,7 +19,9 @@
         <td colspan="2" style="width:150px;"><a href="/analyze/user/{{ user.id }}/skill" title="{{ user.name }} 님의 스킬 스코어 데이터">Skill</a></td>
     </tr>
     <tr>
+        {% if user.rival != null %}
         <td colspan="2" style="width:150px;"><a href="/analyze/user/{{ user.id }}/vs" title="{{ user.name }} 님과 {{user.rival.name }} 님의 스코어 비교">Rival Versus</a></td>
+        {% endif %}
     </tr>
 </table>
 

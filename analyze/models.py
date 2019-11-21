@@ -7,6 +7,7 @@ class User(models.Model):
     name = models.CharField(max_length=10)
     salutation = models.CharField(max_length=100)
     rival = models.ForeignKey('self',on_delete=models.CASCADE, blank = True, null = True)
+    password = models.CharField(max_length=20)
 
     def __str__(self):
         return self.name
@@ -16,7 +17,7 @@ class User(models.Model):
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ['name', 'salutation', 'rival']
+        fields = ['name', 'salutation', 'rival', 'password']
 
 class Song(models.Model):
     name = models.CharField(max_length=50)
@@ -38,6 +39,7 @@ class Score(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     pub_date = models.DateTimeField(default = timezone.now)
     skill = models.FloatField(null = True, blank = True)
+    password = models.CharField(max_length = 20, null = True, blank = True)
 
     def __float__(self):
         return self.acheive
@@ -45,4 +47,4 @@ class Score(models.Model):
 class ScoreForm(ModelForm):
     class Meta:
         model = Score
-        fields =['acheive', 'song', 'user']
+        fields =['acheive', 'song', 'user', 'password']

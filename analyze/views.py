@@ -57,8 +57,10 @@ def ScoreRegister(request):
     if request.method=='POST':
         form = ScoreForm(request.POST)
         if form.is_valid():
-            form.save()
-            checkOverlap()
+            user = get_object_or_404(User, name = (form.cleaned_data['user']))
+            if (user.password == form.cleaned_data['password']):
+                form.save()
+                checkOverlap()
         return redirect('/analyze')
     else:
         form = ScoreForm
@@ -66,7 +68,7 @@ def ScoreRegister(request):
 
 def Skill(request, user_id):
     user = get_object_or_404(User, pk = user_id)
-    skilltable = Score.objects.filter(user = user.get_id()).order_by('skill')[:50]
+    skilltable = Score.objects.filter(user = user.get_id()).order_by('-skill')[:50]
     context = {'User' : user, 'skilltable' : skilltable}
     return render(request, 'analyze/Skill.html', context)
 
@@ -83,6 +85,8 @@ def checkOverlap():
     S = Score.objects.order_by('-pub_date')[0]
     s = Score.objects.filter(user = S.user, song = S.song).order_by('pub_date').first()
     if (S.id == s.id):
+        S.skill = round(s.acheive * s.song.level / 5,2)
+        S.save()
         return;
     if S.acheive > s.acheive:
         S.skill = round(s.acheive * s.song.level / 5,2)
